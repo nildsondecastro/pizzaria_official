@@ -12,6 +12,7 @@ class Homepage extends Model
     protected $primaryKey = 'hom_id';
 
     protected $fillable = [
+        'hom_background',
         'hom_faixa_decorativa',     
         'hom_nome',      
         'hom_telefone',     

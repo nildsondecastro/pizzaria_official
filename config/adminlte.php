@@ -337,22 +337,39 @@ return [
                 ],
             ],
         ],
-        ['header' => 'labels'],
         [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
+            'header' => 'Administrativo',
+            'can'    => 'administrador',
         ],
         [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
+            'text' => 'Painel de Controle',
+            'url'  => '#',
+            'icon' => 'fas fa-fw fa-folder-open',
+            'can'  => 'administrador',
         ],
         [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
+            'text' => 'Configurações',
+            'url'  => '#',
+            'icon' => 'fas fa-fw fa-cogs',
+            'can'  => 'administrador',
         ],
+        
+        //['header' => 'labels'],
+        //[
+        //    'text'       => 'important',
+        //    'icon_color' => 'red',
+        //    'url'        => '#',
+        //],
+        //[
+        //    'text'       => 'warning',
+        //    'icon_color' => 'yellow',
+        //    'url'        => '#',
+        //],
+        //[
+        //    'text'       => 'information',
+        //    'icon_color' => 'cyan',
+        //    'url'        => '#',
+        //],
         //navbar user
         [
             'text'       => 'Perfil',

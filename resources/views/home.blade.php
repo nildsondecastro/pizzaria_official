@@ -4,13 +4,13 @@
 
 @section('content_header')
   @if (\Session::has('mensagem'))
-    <div class="alert alert-success alert-dismissible col-6">
+    <div class="alert alert-success alert-dismissible col-11">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <h5><i class="icon fas fa-check"></i>{!! \Session::get('mensagem') !!}</h5>
     </div>
   @endif
   @if (\Session::has('mensagem_erro'))
-    <div class="alert alert-danger alert-dismissible col-6">
+    <div class="alert alert-danger alert-dismissible col-11">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <h5><i class="icon fas fa-ban"></i>{!! \Session::get('mensagem_erro') !!}</h5>
     </div>
@@ -19,8 +19,8 @@
 
 @section('content')
     <div class="row">
-      <div class="col-12">
-        <div class="position-relative p-3 bg-gray" style="height: 120vh; min-height: 560px">
+      <div class="col-12" style="padding-left: 0px; padding-right: 0px;">
+        <div class="position-relative p-3 bg-gray destaque" style="height: 120vh; min-height: 560px;">
           <!-- <img src="../../dist/img/photo1.png" alt="Photo 1" class="img-fluid"> -->
           @if (isset($homepage->hom_faixa_decorativa))
             <br><br><br>
@@ -94,6 +94,14 @@
 @stop
 
 @section('css')
+  <style>
+    .destaque{
+        background-image: url('dist/img/background1.jpg');
+        background-position: center;
+        background-size: cover;
+        height: 260px;   
+    }
+  </style>
 @stop
 
 @section('js')

@@ -21,6 +21,48 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+    public function getPerfil()
+    {
+        return view('perfil.perfil');
+    }
+
+    public function postSenha(Request $request)
+    {
+        $rules = [
+            'password' => 'required|min:8|confirmed',
+        ];
+        $request->validate($rules);
+
+        $user = User::find(Auth::user()->id);
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect(route('perfil'))->with('mensagem', 'Sucesso na atualização da senha!');
+    }
+
+    public function postDados(Request $request)
+    {
+        $rules = [
+            'name' => 'required|min:3|max:120',
+            'email' => 'required|max:250|unique:users,email,'.Auth::user()->id
+        ];
+        $mensagens = [
+            'email.required' => 'o campo nome de usuário é obrigatório',
+            //'email.unique' => 'o nome de usuário já existe na base',
+        ];
+        
+        $request->validate($rules, $mensagens);
+        
+        $user = User::find(Auth::user()->id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        
+        $user->save();
+        return redirect(route('perfil'))->with('mensagem', 'Sucesso na atualização dos dados!');
+    }
+
+    //falta corrigir
     public function getUsers()
     {
         $aux = DB::table('permissions')
@@ -133,49 +175,9 @@ class UserController extends Controller
         return redirect(route('user.edit', ['id' => $request->id]))->with('mensagem', 'Sucesso na atualização dos dados!');
     }
 
-    public function getPerfil()
-    {
-        $p = DB::table('permissions')
-            ->where('usr_id', '=', Auth::user()->id)
-            ->first();
-        return view('perfil.perfil', compact('p'));
-    }
+    
 
-    public function postSenha(Request $request)
-    {
-        $rules = [
-            'password' => 'required|min:8|confirmed',
-        ];
-        $request->validate($rules);
-
-        $user = User::find(Auth::user()->id);
-        $user->password = Hash::make($request->password);
-        $user->save();
-
-        return redirect(route('perfil'))->with('mensagem', 'Sucesso na atualização da senha!');
-    }
-
-    public function postDados(Request $request)
-    {
-        $rules = [
-            'name' => 'required|min:3|max:120',
-            'email' => 'required|max:250|unique:users,email,'.Auth::user()->id
-        ];
-        $mensagens = [
-            'email.required' => 'o campo nome de usuário é obrigatório',
-            //'email.unique' => 'o nome de usuário já existe na base',
-        ];
-        
-        $request->validate($rules, $mensagens);
-        
-        $user = User::find(Auth::user()->id);
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        
-        $user->save();
-        return redirect(route('perfil'))->with('mensagem', 'Sucesso na atualização dos dados!');
-    }
+    
 
     public function getCreate()
     {

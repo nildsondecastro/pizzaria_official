@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Homepage::create([
+            'hom_background' => 'background1',
             'hom_faixa_decorativa' => 'Estamos com promoções de Natal. Venha conferir.',     
             'hom_nome' => 'Pizzaria Teste',      
             'hom_telefone' => '(98) 986006378',     
