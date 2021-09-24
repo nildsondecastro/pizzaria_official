@@ -43,18 +43,22 @@
           @endif
 
           <div class="description-block">
-            <a class="btn btn-info btn-sm" href="#">
-              <h5 class="description-header">Faça seu Pedido</h5>
-              <span class="description-text">
-                <i class="icon fas fa-chart-pie"></i>
-                <i class="icon fas fa-pizza-slice"></i>
-                <i class="icon fas fa-pizza-slice"></i>
-                <i class="icon fas fa-pizza-slice"></i>
-                <i class="icon fas fa-chart-pie"></i>
-                <i class="icon fas fa-pizza-slice"></i>
-                <i class="icon fas fa-pizza-slice"></i>
-              </span>
-            </a>
+            @if (isset($homepage->hom_aberto))
+              <a class="btn btn-info btn-sm" href="#">
+                <h5 class="description-header">Faça seu Pedido</h5>
+                <span class="description-text">
+                  <i class="icon fas fa-chart-pie"></i>
+                  <i class="icon fas fa-pizza-slice"></i>
+                  <i class="icon fas fa-pizza-slice"></i>
+                  <i class="icon fas fa-pizza-slice"></i>
+                  <i class="icon fas fa-chart-pie"></i>
+                  <i class="icon fas fa-pizza-slice"></i>
+                  <i class="icon fas fa-pizza-slice"></i>
+                </span>
+              </a>
+            @else
+              <h5 class="description-header">Não estamos abertos no momento.</h5>
+            @endif
           </div>
           <br>
 
@@ -91,12 +95,13 @@
           @endif
         </div>
       </div>
+    </div>
 @stop
 
 @section('css')
   <style>
     .destaque{
-        background-image: url('dist/img/background1.jpg');
+        background-image: url('dist/img/{{$homepage->background}}.jpg');
         background-position: center;
         background-size: cover;
         height: 260px;   

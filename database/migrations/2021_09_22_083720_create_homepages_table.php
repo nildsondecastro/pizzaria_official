@@ -17,6 +17,7 @@ class CreateHomepagesTable extends Migration
             $table->bigIncrements('hom_id');
             $table->enum('hom_background', ['background1', 'background2', 'background3']);
             $table->string('hom_faixa_decorativa')->nullable();
+            $table->string('hom_aberto')->nullable();
             $table->string('hom_nome')->nullable();
             $table->string('hom_telefone')->nullable();
             $table->string('hom_local')->nullable();

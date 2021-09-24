@@ -13,7 +13,8 @@ class Homepage extends Model
 
     protected $fillable = [
         'hom_background',
-        'hom_faixa_decorativa',     
+        'hom_faixa_decorativa',    
+        'hom_aberto', 
         'hom_nome',      
         'hom_telefone',     
         'hom_local', 
