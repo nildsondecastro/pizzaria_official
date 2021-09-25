@@ -49,7 +49,7 @@ class HomeController extends Controller
         $users = User::all();
 
         $clientes = [];
-        $aux = Carbon::now()->subDays(31);
+        $aux = Carbon::now()->subDays(30);
         $count = 0;
         
         foreach ($users as $u) {

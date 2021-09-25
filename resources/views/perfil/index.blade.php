@@ -4,6 +4,7 @@
 
 @section('content_header')
     <h1>Lista de Usuários</h1>
+    <small>Esta tela é melhor visualizada no computador</small>
 @stop
 
 @section('content')

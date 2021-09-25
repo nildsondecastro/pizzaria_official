@@ -47,14 +47,14 @@
               <div class="col-sm-4 col-lg-12">
                 <div class="small-box bg-info">
                   <div class="inner">
-                    <h3>150</h3>
+                    <h3>{{count($users)}}</h3>
     
-                    <p>New Orders</p>
+                    <p>Usuários</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-bag"></i>
                   </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="{{route('users')}}" class="small-box-footer">Visualizar Lista <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
               <div class="col-sm-4 col-lg-12">
@@ -108,10 +108,10 @@
       new Chart(document.getElementById("line-chart"), {
         type: 'line',
         data: {
-          labels: ['30 dias atrás',29,28,27,26,25,24,23,22,'três semanas atrás',20,19,18,17,16,15,'duas semanas atrás',13,12,11,10,9,8,'uma semana atrás',6,5,4,3,'antes de ontem','ontem'],
+          labels: ['30 dias atrás',29,'quatro semanas atrás',27,26,25,24,23,22,'três semanas atrás',20,19,18,17,16,15,'duas semanas atrás',13,12,11,10,9,8,'uma semana atrás',6,5,4,3,'antes de ontem','ontem'],
           datasets: [{ 
               data: [@foreach ($clientes as $c){{$c}}, @endforeach],
-              label: "Clientes Registrados",
+              label: "Usuários Registrados",
               borderColor: "#3e95cd",
               fill: false
             }
