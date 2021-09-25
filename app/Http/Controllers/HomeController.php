@@ -34,6 +34,10 @@ class HomeController extends Controller
 
     public function dashboard()
     {
+        if(!Auth::user()->permission->administrador){
+            return redirect()->back()->with('mensagem_erro', 'Seu usuário não tem permissão para está requisição');
+        }
+        
         $users = User::all();
         $clientes = $this->array_clientes();
         

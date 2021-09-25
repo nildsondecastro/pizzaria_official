@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Nildson',
             'email' => 'nildsond@gmail.com',
+            'telefone' => '(98)98800-0000',
+            'endereco' => 'Endereço Teste',
             'password' => Hash::make('12345678'),
         ]);
 
@@ -39,6 +41,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Nildson',
             'email' => 'nildsond2@gmail.com',
             'password' => Hash::make('12345678'),
+            'telefone' => '(98)98800-0000',
+            'endereco' => 'Endereço Teste',
             'created_at' => now()->subDays(10),
         ]);
 
@@ -54,6 +58,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Nildson',
             'email' => 'nildsond3@gmail.com',
             'password' => Hash::make('12345678'),
+            'telefone' => '(98)98800-0000',
+            'endereco' => 'Endereço Teste',
             'created_at' => now()->subDays(11),
         ]);
 
@@ -69,6 +75,8 @@ class DatabaseSeeder extends Seeder
             User::create([
                 'name' => 'Nildson',
                 'email' => 'nildsond'.$i.'@gmail.com',
+                'telefone' => '(98)98800-0000',
+                'endereco' => 'Endereço Teste',
                 'password' => Hash::make('12345678'),
                 'created_at' => now()->subDays(5*$i),
             ]);

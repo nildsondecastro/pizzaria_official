@@ -1,15 +1,15 @@
 @extends('adminlte::auth.auth-page', ['auth_type' => 'login'])
 
 @section('adminlte_css_pre')
-    <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}"> --}}
 @stop
 
 {{-- Rotas existentes --}}
 @php( $login_url = View::getSection('login_url') ?? config('adminlte.login_url', 'login') )
-@php( $register_url = null )
+@php( $register_url = View::getSection('register_url') ?? config('adminlte.register_url', 'register') )
 @php( $password_reset_url = null)
 {{--
-    @php( $register_url = View::getSection('register_url') ?? config('adminlte.register_url', 'register') )
+    @php( $register_url = null )
     @php( $password_reset_url = View::getSection('password_reset_url') ?? config('adminlte.password_reset_url', 'password/reset') )
     @php( $password_reset_url = null)
 --}}
@@ -37,7 +37,7 @@
         {{-- Email field --}}
         <div class="input-group mb-3">
             <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                   value="{{ old('email') }}" placeholder="Usuário" autofocus>
+                   value="{{ old('email') }}" placeholder="Usuário (email)" autofocus>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
@@ -109,12 +109,12 @@
     @if($register_url)
         <p class="my-0">
             <a href="{{ $register_url }}">
-                Registre um novo usuário
+                Não é cadastrado? Clique aqui!
             </a>
         </p>
     @else
         <p class="my-0">
-            Para registrar um novo usuário entre em contato com os administradores da Courotech
+            Para registrar um novo usuário entre em contato com os administradores da Pizzaria
         </p>
     @endif
 @stop

@@ -3,23 +3,40 @@
 @section('title', 'Lista de Usuários')
 
 @section('content_header')
-    <h1>Lista de Usuários</h1><br>
-    @if (\Session::has('mensagem'))
-        <div class="alert alert-success alert-dismissible col-6">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-check"></i>{!! \Session::get('mensagem') !!}</h5>
-        </div>
-    @endif
-    @if (\Session::has('mensagem_erro'))
-        <div class="alert alert-danger alert-dismissible col-6">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-ban"></i>{!! \Session::get('mensagem_erro') !!}</h5>
-        </div>
-    @endif
+    <h1>Lista de Usuários</h1>
 @stop
 
 @section('content')
 
+    @if (\Session::has('mensagem'))
+        <small>
+            <div class="alert alert-success alert-dismissible col-11">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="icon fas fa-check"></i>{!! \Session::get('mensagem') !!}
+            </div>
+        </small>
+    @endif
+    @if (\Session::has('mensagem_erro'))
+        <small>
+            <div class="alert alert-danger alert-dismissible col-11">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="icon fas fa-ban"></i>{!! \Session::get('mensagem_erro') !!}
+            </div>
+        </small>
+    @endif
+    @if(count($errors))
+        <strong class="text-red">
+            <small>
+                <div class="alert alert-danger alert-dismissible col-6">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <i class="icon fas fa-ban"></i>
+                    @foreach ($errors as $e)
+                        {{$e}} <br>
+                    @endforeach
+                </div>
+            </small>
+        </strong>
+    @endif
     
     <div class="card card-primary col-12">
         <div class="card-header">
@@ -27,8 +44,6 @@
         </div>
         
         @if (isset($users))
-            <form action="#" method="POST">
-                {{ csrf_field() }}
                 <small>
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
@@ -36,7 +51,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nome</th>
-                                    <th>Nome de Usuário</th>
+                                    <th>Email</th>
+                                    <th>Telefone</th>
+                                    <th>Endereços</th>
                                     <th>Status</th>
                                     <th>Ações</th>
                                 </tr>
@@ -48,6 +65,8 @@
                                         <td>{{$item->id}}</td>
                                         <td>{{$item->name}}</td>
                                         <td>{{$item->email}}</td>
+                                        <td>{{$item->telefone}}</td>
+                                        <td>{{$item->endereco}}</td>
                                         @if ($item->status)
                                             <td style="background-color: rgb(98, 230, 98);">
                                                 <strong>Usuário Ativo</strong>
@@ -61,24 +80,20 @@
                                             <a href="/user/edit/{{$item->id}}" class="btn btn-warning btn-sm">Editar</a>
                                         </td>
                                     </tr>
-                                    
                                 @endforeach
                                 
                             </tbody>
                         </table>
                     </div>
                 </small>
-                
-            </form>
-            
         @else
             Sem Usuários Cadastrados.
         @endif
     </div>
+
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')

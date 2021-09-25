@@ -21,16 +21,20 @@
 @section('content')
     
     @if (\Session::has('mensagem'))
-        <div class="alert alert-success alert-dismissible col-11">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-check"></i>{!! \Session::get('mensagem') !!}</h5>
-        </div>
+        <small>
+            <div class="alert alert-success alert-dismissible col-11">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="icon fas fa-check"></i>{!! \Session::get('mensagem') !!}
+            </div>
+        </small>
     @endif
     @if (\Session::has('mensagem_erro'))
-        <div class="alert alert-danger alert-dismissible col-11">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-ban"></i>{!! \Session::get('mensagem_erro') !!}</h5>
-        </div>
+        <small>
+            <div class="alert alert-danger alert-dismissible col-11">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="icon fas fa-ban"></i>{!! \Session::get('mensagem_erro') !!}
+            </div>
+        </small>
     @endif
     <section class="content">
         <div class="container-fluid">
@@ -60,8 +64,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="email" class="col-sm-2 col-form-label">Nome de Usuário <br>
-                                                    <span class="small">usado no login</span></label>
+                                                <label for="email" class="col-sm-2 col-form-label">Usuário (email) <br>
+                                                    <span class="small">Usado no login</span></label>
                                                 <div class="col-sm-10">
                                                     <input type="email" class="form-control" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
                                                         name="email" value="{{Auth::user()->email}}">
@@ -74,7 +78,40 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            
+                                            <div class="form-group row">
+                                                <label for="text" class="col-sm-2 col-form-label">Telefone</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" id="telefone" name="telefone" class="form-control" class="form-control {{ $errors->has('telefone') ? 'is-invalid' : '' }}"
+                                                        value="{{Auth::user()->telefone}}">
+                                                    @if($errors->has('telefone'))
+                                                        <strong class="text-red">
+                                                            <small>
+                                                                {{ $errors->first('telefone') }}
+                                                            </small>
+                                                        </strong>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="endereco" class="col-sm-2 col-form-label">Endereço</label>
+                                                <div class="col-sm-10">
+                                                    <textarea name="endereco" class="form-control {{ $errors->has('endereco') ? 'is-invalid' : '' }}"
+                                                        placeholder="Endereço Rua 1, Casa A, Bairro B, São Luis, CEP 65000-000"
+                                                        rows="6">{{Auth::user()->endereco}}</textarea>
+                                                    <div class="col-12">
+                                                        <small><small>
+                                                            Informe o endereço com o máximo de informações possíveis.
+                                                        </small></small>
+                                                    </div>
+                                                    @if($errors->has('endereco'))
+                                                        <strong class="text-red">
+                                                            <small>
+                                                                {{ $errors->first('endereco') }}
+                                                            </small>
+                                                        </strong>
+                                                    @endif
+                                                </div>
+                                            </div>
                                             <div class="form-group row">
                                                 <div class="offset-sm-2 col-sm-10">
                                                     <button type="submit" class="btn btn-success">Salvar Alterações</button>
@@ -147,9 +184,21 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')
     {{ Log::info("Tela de Perfil acesssada. ".Auth::user()); }}
+
+    <script> 
+        const telefone = document.getElementById('telefone') // Seletor do campo de telefone
+
+        telefone.addEventListener('keypress', (e) => mascaraTelefone(e.target.value)) // Dispara quando digitado no campo
+        telefone.addEventListener('change', (e) => mascaraTelefone(e.target.value)) // Dispara quando autocompletado o campo
+
+        const mascaraTelefone = (valor) => {
+            valor = valor.replace(/\D/g, "")
+            valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2")
+            telefone.value = valor // Insere o(s) valor(es) no campo
+        }
+    </script>
 @stop

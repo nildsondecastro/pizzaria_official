@@ -24,6 +24,7 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">Painel de Controle</h1>
+            <small>Esta tela é melhor visualizada no computador</small>
           </div>
         </div>
       </div>
@@ -36,15 +37,6 @@
           <div class="card card-primary col-lg-9 col-12">
             <div class="card-header">
               <h3 class="card-title">Número Total de Usuários Registrados: {{count($users)}}</h3>
-  
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
             </div>
             <div class="card-body">
               <canvas id="line-chart" width="800" height="400"></canvas>

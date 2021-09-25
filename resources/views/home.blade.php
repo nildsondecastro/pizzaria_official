@@ -101,7 +101,7 @@
 @section('css')
   <style>
     .destaque{
-        background-image: url('dist/img/{{$homepage->background}}.jpg');
+        background-image: url('dist/img/{{$homepage->hom_background}}.jpg');
         background-position: center;
         background-size: cover;
         height: 260px;   

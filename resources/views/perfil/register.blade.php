@@ -20,7 +20,7 @@
         {{-- Name field --}}
         <div class="input-group mb-3">
             <input type="text" name="name" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                   value="{{ old('name') }}" placeholder="Nome completo" autofocus>
+                   value="{{ old('name') }}" placeholder="Nome" autofocus required>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
@@ -36,7 +36,7 @@
         {{-- Email field --}}
         <div class="input-group mb-3">
             <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                   value="{{ old('email') }}" placeholder="Email">
+                   value="{{ old('email') }}" placeholder="Email" required>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
@@ -53,15 +53,17 @@
         <div class="input-group mb-3">
             <input type="password" name="password"
                    class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
-                   placeholder="Senha">
+                   placeholder="Senha" required>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
                 </div>
             </div>
-            <small class="col-12">
-                A senha deve ter no mínimo 8 caracteres
-            </small>
+            <div class="col-12">
+                <small>
+                    A senha deve ter no mínimo 6 caracteres.
+                </small>
+            </div>
             @if($errors->has('password'))
                 <div class="invalid-feedback">
                     <strong>{{ $errors->first('password') }}</strong>
@@ -73,7 +75,7 @@
         <div class="input-group mb-3">
             <input type="password" name="password_confirmation"
                    class="form-control {{ $errors->has('password_confirmation') ? 'is-invalid' : '' }}"
-                   placeholder="Confirme a senha">
+                   placeholder="Confirme a senha" required>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
@@ -86,58 +88,100 @@
             @endif
         </div>
 
+        <div class="col-md-12">
+            <div class="card card-secondary collapsed-card">
+                <div class="card-header">
+                    <h3 class="card-title">Informações Adicionais</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body" style="display: none;">
+                    <div class="row">
+                        <div class="col-12">
+                            <small style="color: red">
+                                Estas Informações podem ser adicionadas depois ou no momento do pedido.
+                            </small>
+                        </div>
+                        <div class="input-group col-12">
+                            <input type="text" id="telefone" name="telefone" class="form-control {{ $errors->has('telefone') ? 'is-invalid' : '' }}"
+                                   value="{{ old('telefone') }}" placeholder="988660000" maxlength="20">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-phone"></span>
+                                </div>
+                            </div>
+                            @if($errors->has('telefone'))
+                                <div class="invalid-feedback">
+                                    <strong>{{ $errors->first('telefone') }}</strong>
+                                </div>
+                            @endif
+                            <p class="col-12">
+
+                            </p>
+                        </div>
+                        
+                        <div class="input-group col-12">
+                            <textarea name="endereco" class="form-control {{ $errors->has('endereco') ? 'is-invalid' : '' }}"
+                                placeholder="Endereço Rua 1, Casa A, Bairro B, São Luis, CEP 65000-000"
+                                rows="6">{{ old('endereco') }}</textarea>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-map"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <small>
+                                    Informe o endereço com o máximo de informações possíveis.
+                                </small>
+                            </div>
+                            @if($errors->has('endereco'))
+                                <div class="invalid-feedback">
+                                    <strong>{{ $errors->first('endereco') }}</strong>
+                                </div>
+                            @endif
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
         <label for="">Permissões</label>
         <div class="form-group">
             <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                <input type="checkbox" class="custom-control-input" id="os" name="os">
-                <label class="custom-control-label" for="os">
-                    Pode Gerenciar Ordens de Serviço
-                </label>
-            </div>
-        </div>
-        <hr>
-        <div class="form-group">
-            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                <input type="checkbox" class="custom-control-input" id="estoque" name="estoque">
-                <label class="custom-control-label" for="estoque">
-                    Pode Gerenciar Estoque
-                </label>
-            </div>
-        </div>
-        <hr>
-        <div class="form-group">
-            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                <input type="checkbox" class="custom-control-input" id="show_users" name="show_users">
-                <label class="custom-control-label" for="show_users">
-                    Visualizar Usuários
+                <input type="checkbox" class="custom-control-input" id="cliente" name="cliente">
+                <label class="custom-control-label" for="cliente">
+                    Cliente
                 </label>
             </div>
         </div>
         <div class="form-group">
             <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                <input type="checkbox" class="custom-control-input" id="add_users" name="add_users">
-                <label class="custom-control-label" for="add_users">
-                    Adicionar Novos Usuários    
+                <input type="checkbox" class="custom-control-input" id="funcionario" name="funcionario">
+                <label class="custom-control-label" for="funcionario">
+                    Funcionário
                 </label>
             </div>
         </div>
         <div class="form-group">
             <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                <input type="checkbox" class="custom-control-input" id="edit_users" name="edit_users">
-                <label class="custom-control-label" for="edit_users">
-                    Editar Usuários
+                <input type="checkbox" class="custom-control-input" id="gerente" name="gerente">
+                <label class="custom-control-label" for="gerente">
+                    Gerente
                 </label>
             </div>
         </div>
         <div class="form-group">
             <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                <input type="checkbox" class="custom-control-input" id="restrict_users" name="restrict_users">
-                <label class="custom-control-label" for="restrict_users">
-                    Encerrar Usuários (restringir acesso)
+                <input type="checkbox" class="custom-control-input" id="administrador" name="administrador">
+                <label class="custom-control-label" for="administrador">
+                    Administrador    
                 </label>
             </div>
         </div>
-        <hr>
 
         {{-- Register button --}}
         <button type="submit" class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
@@ -154,4 +198,17 @@
 
 @section('js')
     {{ Log::info("Tela de registro de novo usuário acessada ".Auth::user()); }}
+
+    <script> 
+        const telefone = document.getElementById('telefone') // Seletor do campo de telefone
+
+        telefone.addEventListener('keypress', (e) => mascaraTelefone(e.target.value)) // Dispara quando digitado no campo
+        telefone.addEventListener('change', (e) => mascaraTelefone(e.target.value)) // Dispara quando autocompletado o campo
+
+        const mascaraTelefone = (valor) => {
+            valor = valor.replace(/\D/g, "")
+            valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2")
+            telefone.value = valor // Insere o(s) valor(es) no campo
+        }
+    </script>
 @stop

@@ -3,22 +3,26 @@
 @section('title', 'Edição')
 
 @section('content_header')
-    <h1>Tela de Edição de usuário</h1><br>
+    <h1>Tela de Edição de usuário</h1>
 @stop
 
 @section('content')
     
     @if (\Session::has('mensagem'))
-        <div class="alert alert-success alert-dismissible col-6">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-check"></i>{!! \Session::get('mensagem') !!}</h5>
-        </div>
+        <small>
+            <div class="alert alert-success alert-dismissible col-11">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="icon fas fa-check"></i>{!! \Session::get('mensagem') !!}
+            </div>
+        </small>
     @endif
     @if (\Session::has('mensagem_erro'))
-        <div class="alert alert-danger alert-dismissible col-6">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-ban"></i>{!! \Session::get('mensagem_erro') !!}</h5>
-        </div>
+        <small>
+            <div class="alert alert-danger alert-dismissible col-11">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="icon fas fa-ban"></i>{!! \Session::get('mensagem_erro') !!}
+            </div>
+        </small>
     @endif
     <section class="content">
         <div class="container-fluid">
@@ -26,85 +30,8 @@
                 @if (isset($u))
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header p-2">
-                                <ul class="nav nav-pills">
-                                    <li class="nav-item"><a class="nav-link" href="#seguranca" data-toggle="tab">Segurança</a></li>
-                                    <li class="nav-item"><a class="nav-link active" href="#dados" data-toggle="tab">Dados</a></li>
-                                </ul>
-                            </div>
                             <div class="card-body">
                                 <div class="tab-content">
-                                    <div class="tab-pane" id="seguranca">
-                                        <div class="card-body">
-                                            <strong><i class="fas fa-lock mr-1"></i> Ações: </strong>
-                                                <p class="text-muted">
-                                                    <form action="/user/status/{{$u->id}}" method="post">
-                                                        @csrf
-                                                        <input type="hidden" name="id" value="{{$u->id}}">
-                                                        @if ($u->status)
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-10">
-                                                                    <button type="submit" class="btn btn-danger">Restringir Usuário</button>
-                                                                </div>
-                                                            </div>
-                                                        @else
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-10">
-                                                                    <button type="submit" class="btn btn-warning">Devolver Acesso do Usuário</button>
-                                                                </div>
-                                                            </div>
-                                                        @endif
-                                                    </form>
-                                                </p>
-                                            <hr>
-                                            <strong><i class="fas fa-book mr-1"></i> Perfil criado em: </strong>
-                                                <p>
-                                                    {{date('d/m/Y H:i:s', strtotime($u->created_at));}}
-                                                </p>
-                                            <hr>
-                            
-                                            <strong><i class="fas fa-book mr-1"></i> Ultima atualização dos dados: </strong>
-                                                <p>
-                                                    {{date('d/m/Y H:i:s', strtotime($u->updated_at));}}
-                                                </p>
-                                            <hr>
-
-                                            <strong><i class="fas fa-book mr-1"></i> Status: </strong>
-                                                <p>
-                                                    @if ($u->status)
-                                                        Usuário Ativo
-                                                    @else
-                                                        Usuário Restringido (não pode mais realizar login)
-                                                    @endif
-                                                </p>
-                                            <hr>
-                                            <strong><i class="fas fa-book mr-1"></i> Permissões deste usuário: </strong>
-                                                <p>
-                                                    @isset($p)
-                                                        @if ($p->os)
-                                                            Pode Gerenciar Ordens de Serviço <br>
-                                                        @endif
-                                                        @if ($p->estoque)
-                                                            Pode Gerenciar Estoque <br>
-                                                        @endif
-                                                        @if ($p->show_users)
-                                                            Visualizar Usuários <br>
-                                                        @endif
-                                                        @if ($p->add_users)
-                                                            Adicionar Usuários <br>
-                                                        @endif
-                                                        @if ($p->edit_users)
-                                                            Editar Usuários <br>
-                                                        @endif
-                                                        @if ($p->restrict_users)
-                                                            Restringir Usuários <br>
-                                                        @endif
-                                                    @endisset
-                                                </p>
-                                            
-                                        </div>
-                                    </div>
-
                                     <div class="tab-pane active" id="dados">
                                         <form action="/user/dados/{{$u->id}}" class="form-horizontal" method="POST">
                                             @csrf
@@ -134,6 +61,40 @@
                                                         <strong class="text-red">
                                                             <small>
                                                                 {{ $errors->first('email') }}
+                                                            </small>
+                                                        </strong>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="text" class="col-sm-2 col-form-label">Telefone</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" id="telefone" name="telefone" class="form-control" class="form-control {{ $errors->has('telefone') ? 'is-invalid' : '' }}"
+                                                        value="{{$u->telefone}}">
+                                                    @if($errors->has('telefone'))
+                                                        <strong class="text-red">
+                                                            <small>
+                                                                {{ $errors->first('telefone') }}
+                                                            </small>
+                                                        </strong>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="endereco" class="col-sm-2 col-form-label">Endereço</label>
+                                                <div class="col-sm-10">
+                                                    <textarea name="endereco" class="form-control {{ $errors->has('endereco') ? 'is-invalid' : '' }}"
+                                                        placeholder="Endereço Rua 1, Casa A, Bairro B, São Luis, CEP 65000-000"
+                                                        rows="6">{{$u->endereco}}</textarea>
+                                                    <div class="col-12">
+                                                        <small><small>
+                                                            Informe o endereço com o máximo de informações possíveis.
+                                                        </small></small>
+                                                    </div>
+                                                    @if($errors->has('endereco'))
+                                                        <strong class="text-red">
+                                                            <small>
+                                                                {{ $errors->first('endereco') }}
                                                             </small>
                                                         </strong>
                                                     @endif
@@ -185,6 +146,61 @@
                                                 </div>
                                             </div>
                                         </form>
+                                        <hr>
+                                        <strong><i class="fas fa-lock mr-1"></i> Ações: </strong>
+                                            <p class="text-muted">
+                                                <form action="/user/status/{{$u->id}}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{$u->id}}">
+                                                    @if ($u->status)
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-10">
+                                                                <button type="submit" class="btn btn-danger">Restringir Usuário</button>
+                                                            </div>
+                                                        </div>
+                                                    @else
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-10">
+                                                                <button type="submit" class="btn btn-warning">Devolver Acesso do Usuário</button>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                </form>
+                                            </p>
+                                        <hr>
+                                        <small>
+                                            <strong><i class="fas fa-book mr-1"></i> Perfil criado em: </strong>
+                                                <p>
+                                                    {{date('d/m/Y H:i:s', strtotime($u->created_at));}}
+                                                </p>
+                                            <strong><i class="fas fa-book mr-1"></i> Ultima atualização dos dados: </strong>
+                                                <p>
+                                                    {{date('d/m/Y H:i:s', strtotime($u->updated_at));}}
+                                                </p>
+                                            <strong><i class="fas fa-book mr-1"></i> Status: </strong>
+                                                <p>
+                                                    @if ($u->status)
+                                                        Usuário Ativo
+                                                    @else
+                                                        Usuário Restringido (não pode mais realizar login)
+                                                    @endif
+                                                </p>
+                                            <strong><i class="fas fa-book mr-1"></i> Níveis de Acesso: </strong>
+                                                <p>
+                                                    @if ($u->permission->cliente)
+                                                        Cliente <br>
+                                                    @endif
+                                                    @if ($u->permission->funcionario)
+                                                        Funcionário <br>
+                                                    @endif
+                                                    @if ($u->permission->gerente)
+                                                        Gerente <br>
+                                                    @endif
+                                                    @if ($u->permission->administrador)
+                                                        Administrador <br>
+                                                    @endif
+                                                </p>
+                                        </small>
                                     </div>
                                 </div>
                             </div>
@@ -200,9 +216,21 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')
     {{ Log::info("Tela de Edição de ".$u->id." ".$u->name." acessada por ".Auth::user()); }}
+
+    <script> 
+        const telefone = document.getElementById('telefone') // Seletor do campo de telefone
+
+        telefone.addEventListener('keypress', (e) => mascaraTelefone(e.target.value)) // Dispara quando digitado no campo
+        telefone.addEventListener('change', (e) => mascaraTelefone(e.target.value)) // Dispara quando autocompletado o campo
+
+        const mascaraTelefone = (valor) => {
+            valor = valor.replace(/\D/g, "")
+            valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2")
+            telefone.value = valor // Insere o(s) valor(es) no campo
+        }
+    </script>
 @stop

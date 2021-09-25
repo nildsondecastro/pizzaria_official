@@ -278,7 +278,7 @@ return [
             'label_color' => 'success',
         ],
         [
-            'header' => 'Perfis e Usuários',
+            'header' => 'Sua Conta',
             'can'  => 'login',
         ],
         [
@@ -338,12 +338,28 @@ return [
             ],
         ],
         [
+            'header' => 'Gerência',
+            'can'    => 'gerente',
+        ],
+        [
+            'text' => 'Lista de Usuários',
+            'url'  => 'users',
+            'icon' => 'fas fa-fw fa-folder-open',
+            'can'  => 'gerente',
+        ],
+        [
+            'text' => 'Adicionar Usuário',
+            'url'  => 'user/create',
+            'icon' => 'fas fa-fw fa-user-plus',
+            'can'  => 'gerente',
+        ],
+        [
             'header' => 'Administrativo',
             'can'    => 'administrador',
         ],
         [
             'text' => 'Painel de Controle',
-            'url'  => '#',
+            'url'  => 'dashboard',
             'icon' => 'fas fa-fw fa-folder-open',
             'can'  => 'administrador',
         ],

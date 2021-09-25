@@ -29,7 +29,7 @@ class UserController extends Controller
     public function postSenha(Request $request)
     {
         $rules = [
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|min:6|confirmed',
         ];
         $request->validate($rules);
 
@@ -57,18 +57,16 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->telefone = $request->telefone;
+        $user->endereco = $request->endereco;
         
         $user->save();
         return redirect(route('perfil'))->with('mensagem', 'Sucesso na atualização dos dados!');
     }
 
-    //falta corrigir
     public function getUsers()
     {
-        $aux = DB::table('permissions')
-            ->where('usr_id', '=', Auth::user()->id)
-            ->first();
-        if(!$aux->show_users){
+        if(!Auth::user()->permission->gerente){
             return redirect()->back()->with('mensagem_erro', 'Seu usuário não tem permissão para está requisição');
         }
         
@@ -78,28 +76,17 @@ class UserController extends Controller
 
     public function getEdit($id)
     {
-        $aux = DB::table('permissions')
-            ->where('usr_id', '=', Auth::user()->id)
-            ->first();
-        if(!$aux->edit_users){
+        if(!Auth::user()->permission->gerente){
             return redirect()->back()->with('mensagem_erro', 'Seu usuário não tem permissão para está requisição');
         }
-        
-        $u = DB::table('users')
-            ->where('id', '=', $id)
-            ->first();//user
-        $p = DB::table('permissions')
-            ->where('usr_id', '=', $id)
-            ->first();
-        return view('perfil.edit', compact('u', 'p'));
+
+        $u = User::find($id);
+        return view('perfil.edit', compact('u'));
     }
 
     public function postUserSenha(Request $request, $id)
     {
-        $aux = DB::table('permissions')
-            ->where('usr_id', '=', Auth::user()->id)
-            ->first();
-        if(!$aux->edit_users){
+        if(!Auth::user()->permission->gerente){
             return redirect()->back()->with('mensagem_erro', 'Seu usuário não tem permissão para está requisição');
         }
         
@@ -107,7 +94,7 @@ class UserController extends Controller
             return redirect()->back()->with('mensagem_erro', 'Algum erro ocorreu');
         }
         $rules = [
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|min:6|confirmed',
         ];
         $request->validate($rules);
 
@@ -120,10 +107,7 @@ class UserController extends Controller
 
     public function postUserDados(Request $request, $id)
     {
-        $aux = DB::table('permissions')
-            ->where('usr_id', '=', Auth::user()->id)
-            ->first();
-        if(!$aux->edit_users){
+        if(!Auth::user()->permission->gerente){
             return redirect()->back()->with('mensagem_erro', 'Seu usuário não tem permissão para está requisição');
         }
         
@@ -145,6 +129,8 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->telefone = $request->telefone;
+        $user->endereco = $request->endereco;
         
         $user->save();
         return redirect(route('user.edit', ['id' => $request->id]))->with('mensagem', 'Sucesso na atualização dos dados!');
@@ -152,10 +138,7 @@ class UserController extends Controller
 
     public function postUserStatus(Request $request, $id)
     {
-        $aux = DB::table('permissions')
-            ->where('usr_id', '=', Auth::user()->id)
-            ->first();
-        if(!$aux->restrict_users){
+        if(!Auth::user()->permission->gerente){
             return redirect()->back()->with('mensagem_erro', 'Seu usuário não tem permissão para está requisição');
         }
         
@@ -175,42 +158,24 @@ class UserController extends Controller
         return redirect(route('user.edit', ['id' => $request->id]))->with('mensagem', 'Sucesso na atualização dos dados!');
     }
 
-    
-
-    
-
     public function getCreate()
     {
-        $aux = DB::table('permissions')
-            ->where('usr_id', '=', Auth::user()->id)
-            ->first();
-        if(!$aux->add_users){
+        if(!Auth::user()->permission->gerente){
             return redirect()->back()->with('mensagem_erro', 'Seu usuário não tem permissão para está requisição');
         }
-        
         return view('perfil.register');
     }
 
     public function postStore(Request $request)
     {
-        $aux = DB::table('permissions')
-            ->where('usr_id', '=', Auth::user()->id)
-            ->first();
-        if(!$aux->add_users){
+        if(!Auth::user()->permission->gerente){
             return redirect()->back()->with('mensagem_erro', 'Seu usuário não tem permissão para está requisição');
         }
-        
-        $show_users = $request->show_users ? true : false ;
-        $add_users = $request->add_users ? true : false ;
-        $edit_users = $request->edit_users ? true : false ;
-        $restrict_users = $request->restrict_users ? true : false ;
-        $estoque = $request->estoque ? true : false ;
-        $permission_os = $request->os ? true : false ;
         
         $rules = [
             'name' => 'required|min:3|max:120',
             'email' => 'required|unique:users|email|max:250',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|min:6|confirmed',
         ];
         $mensagens = [
             'email.required' => 'o nome de usuário é obrigatório',
@@ -223,16 +188,16 @@ class UserController extends Controller
         $user = User::create([
             'name'      => $request->name,
             'email'     => $request->email,
+            'telefone'      => $request->telefone,
+            'endereco'     => $request->endereco,
             'password'  => Hash::make($request->password),
         ]);
         Permission::create([
-            'show_users'        => $show_users,
-            'add_users'         => $add_users,
-            'edit_users'        => $edit_users,
-            'restrict_users'    => $restrict_users,
-            'estoque'           => $estoque,
-            'os'                => $permission_os,
-            'usr_id'            => $user->id,
+            'cliente'       => $request->cliente ? true : false,
+            'funcionario'   => $request->funcionario ? true : false,
+            'gerente'       => $request->gerente ? true : false,
+            'administrador' => $request->administrador ? true : false,
+            'usr_id'        => $user->id,
             
         ]);
         return redirect(route('users'))->with('mensagem', 'Sucesso no Registro do Usuário '.$user->name.'!');
