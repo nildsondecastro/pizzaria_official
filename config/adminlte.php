@@ -255,6 +255,11 @@ return [
         //    'can'  => 'manage-blog',
         //],
         [
+            'text'    => 'Cardápio',
+            'icon'    => 'fas fa-fw fa-list',
+            'url'     => 'cardapio',
+        ],
+        [
             'header'  => 'Gerenciamento do Estoque',
             'can'     => 'estoque',
         ],
@@ -270,13 +275,13 @@ return [
             'can'     => 'estoque',
             'url'     => 'estoque',
         ],
-        [
-            'text'        => 'Dia de Hoje',
-            'url'         => 'admin/pages',
-            'icon'        => 'fas fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
+        //[
+        //    'text'        => 'Dia de Hoje',
+        //    'url'         => 'admin/pages',
+        //    'icon'        => 'fas fa-fw fa-file',
+        //    'label'       => 4,
+        //    'label_color' => 'success',
+        //],
         [
             'header' => 'Sua Conta',
             'can'  => 'login',
@@ -299,44 +304,44 @@ return [
             'icon' => 'fas fa-fw fa-lock',
             'can'  => 'show_users',
         ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
+        //[
+        //    'text'    => 'multilevel',
+        //    'icon'    => 'fas fa-fw fa-share',
+        //    'submenu' => [
+        //        [
+        //            'text' => 'level_one',
+        //            'url'  => '#',
+        //        ],
+        //        [
+        //            'text'    => 'level_one',
+        //            'url'     => '#',
+        //            'submenu' => [
+        //                [
+        //                    'text' => 'level_two',
+        //                    'url'  => '#',
+        //                ],
+        //                [
+        //                    'text'    => 'level_two',
+        //                    'url'     => '#',
+        //                    'submenu' => [
+        //                        [
+        //                            'text' => 'level_three',
+        //                            'url'  => '#',
+        //                        ],
+        //                        [
+        //                            'text' => 'level_three',
+        //                            'url'  => '#',
+        //                        ],
+        //                    ],
+        //                ],
+        //            ],
+        //        ],
+        //        [
+        //            'text' => 'level_one',
+        //            'url'  => '#',
+        //        ],
+        //    ],
+        //],
         [
             'header' => 'Gerência',
             'can'    => 'gerente',

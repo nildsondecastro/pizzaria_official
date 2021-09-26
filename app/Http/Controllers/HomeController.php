@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Homepage;
 use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Support\Arr;
+use App\Models\Produto;
+use App\Models\Ingrediente;
 
 class HomeController extends Controller
 {
@@ -32,41 +32,19 @@ class HomeController extends Controller
         return view('home', compact('homepage'));
     }
 
-    public function dashboard()
+    public function cardapio()
     {
-        if(!Auth::user()->permission->administrador){
-            return redirect()->back()->with('mensagem_erro', 'Seu usuário não tem permissão para está requisição');
-        }
-        
-        $users = User::all();
-        $clientes = $this->array_clientes();
-        
-        return view("admin.dashboard", compact('users', 'clientes'));
+        $pizzas = Produto::all();
+        return view('cardapio.index', compact('pizzas'));
+    }
+    
+
+    public function teste()
+    {
+        $p = Produto::find(1);
+        dd($p, $p->ingredientes);
     }
 
-    private function array_clientes()
-    {
-        $users = User::all();
 
-        $clientes = [];
-        $aux = Carbon::now()->subDays(30);
-        $count = 0;
-        
-        foreach ($users as $u) {
-            if ($u->created_at->startOfDay()->lessThanOrEqualTo($aux->startOfDay())) {
-                $count++;
-            }
-        }
-        for ($i=0; $i < 30; $i++) { 
-            foreach ($users as $u) {
-                if ($u->created_at->startOfDay()->toISOString() == $aux->startOfDay()->toISOString()) {
-                    $count++;
-                }
-            }
-            $clientes = Arr::add($clientes, "[".$i."]" , $count);
-            $aux->addDay();
-        }
-
-        return $clientes;
-    }
+    
 }

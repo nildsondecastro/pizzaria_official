@@ -21,11 +21,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+Route::get('/cardapio', [App\Http\Controllers\HomeController::class, 'cardapio'])->name('cardapio');
+
+Route::get('/teste', [App\Http\Controllers\HomeController::class, 'teste'])->name('teste');
+
 
 
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
+
+
     //rotas de perfil e usuários
     Route::get('/perfil', [App\Http\Controllers\UserController::class, 'getPerfil'])->name('perfil');
     Route::post('/perfil/senha', [App\Http\Controllers\UserController::class, 'postSenha'])->name('perfil.senha');

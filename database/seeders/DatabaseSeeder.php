@@ -9,6 +9,7 @@ use App\Models\Ingrediente;
 use App\Models\Produto;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Homepage;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -107,103 +108,315 @@ class DatabaseSeeder extends Seeder
 
     //Ingredientes
         Ingrediente::create([
+            'ing_id' => 1,
             'ing_nome' => 'mussarela',
         ]);
         Ingrediente::create([
+            'ing_id' => 2,
             'ing_nome' => 'calabresa',
         ]);
         Ingrediente::create([
+            'ing_id' => 3,
             'ing_nome' => 'cebola',
         ]);
         Ingrediente::create([
+            'ing_id' => 4,
             'ing_nome' => 'azeitona',
         ]);
         Ingrediente::create([
+            'ing_id' => 5,
             'ing_nome' => 'orégano',
         ]);
 
         Ingrediente::create([
+            'ing_id' => 6,
             'ing_nome' => 'frango',
         ]);
         Ingrediente::create([
+            'ing_id' => 7,
             'ing_nome' => 'catupiry',
         ]);
 
         Ingrediente::create([
+            'ing_id' => 8,
             'ing_nome' => 'presunto',
         ]);
         Ingrediente::create([
+            'ing_id' => 9,
             'ing_nome' => 'ovo',
         ]);
         Ingrediente::create([
+            'ing_id' => 10,
             'ing_nome' => 'pimentão',
         ]);
 
         Ingrediente::create([
+            'ing_id' => 11,
             'ing_nome' => 'tomate',
         ]);
 
         Ingrediente::create([
+            'ing_id' => 12,
             'ing_nome' => 'bacon',
         ]);
         Ingrediente::create([
+            'ing_id' => 13,
             'ing_nome' => 'cebola',
         ]);
 
         Ingrediente::create([
+            'ing_id' => 14,
             'ing_nome' => 'queijo prato',
         ]);
         Ingrediente::create([
+            'ing_id' => 15,
             'ing_nome' => 'queijo coalho',
         ]);
         Ingrediente::create([
+            'ing_id' => 16,
             'ing_nome' => 'cheddar',
         ]);
 
         Ingrediente::create([
+            'ing_id' => 17,
             'ing_nome' => 'salsicha',
         ]);
         Ingrediente::create([
+            'ing_id' => 18,
             'ing_nome' => 'batata palha',
         ]);
         Ingrediente::create([
+            'ing_id' => 19,
             'ing_nome' => 'milho verde',
         ]);
     //Pizzas
         Produto::create([
+            'pro_id' => 1,
             'pro_nome' => 'Calabresa',
             'pro_valor' => 22.00,
             'pro_status' => 1,
         ]);
         Produto::create([
-            'pro_nome' => 'Frango',
+            'pro_id' => 2,
+            'pro_nome' => 'Frango c/ Catupiry',
             'pro_valor' => 22.00,
             'pro_status' => 1,
         ]);
         Produto::create([
+            'pro_id' => 3,
             'pro_nome' => 'Portuguesa',
             'pro_valor' => 22.00,
             'pro_status' => 1,
         ]);
         Produto::create([
+            'pro_id' => 4,
             'pro_nome' => 'Napolitana',
             'pro_valor' => 22.00,
             'pro_status' => 1,
         ]);
         Produto::create([
+            'pro_id' => 5,
             'pro_nome' => 'Bacon',
             'pro_valor' => 22.00,
             'pro_status' => 1,
         ]);
         Produto::create([
-            'pro_nome' => 'Hot Dog',
+            'pro_id' => 6,
+            'pro_nome' => 'Hot-Dog',
             'pro_valor' => 22.00,
             'pro_status' => 1,
         ]);
         Produto::create([
+            'pro_id' => 7,
             'pro_nome' => '4 Queijos',
             'pro_valor' => 25.00,
             'pro_status' => 1,
+        ]);
+
+    //Pizzas e Ingredientes
+    //pizza calabresa
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 1,
+            'ing_id' => 1,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 1,
+            'ing_id' => 2,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 1,
+            'ing_id' => 3,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 1,
+            'ing_id' => 4,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 1,
+            'ing_id' => 5,
+            'created_at' => now(),
+        ]);
+
+    //pizza frango c catupiry
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 2,
+            'ing_id' => 1,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 2,
+            'ing_id' => 6,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 2,
+            'ing_id' => 7,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 2,
+            'ing_id' => 5,
+            'created_at' => now(),
+        ]);
+    //portuguesa
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 3,
+            'ing_id' => 1,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 3,
+            'ing_id' => 8,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 3,
+            'ing_id' => 9,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 3,
+            'ing_id' => 10,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 3,
+            'ing_id' => 4,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 3,
+            'ing_id' => 5,
+            'created_at' => now(),
+        ]);
+    //Napolitana
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 4,
+            'ing_id' => 1,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 4,
+            'ing_id' => 8,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 4,
+            'ing_id' => 11,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 4,
+            'ing_id' => 4,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 4,
+            'ing_id' => 5,
+            'created_at' => now(),
+        ]);
+    //Bacon
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 5,
+            'ing_id' => 1,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 5,
+            'ing_id' => 12,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 5,
+            'ing_id' => 13,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 5,
+            'ing_id' => 4,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 5,
+            'ing_id' => 5,
+            'created_at' => now(),
+        ]);
+    //4 Queijos
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 6,
+            'ing_id' => 1,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 6,
+            'ing_id' => 14,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 6,
+            'ing_id' => 15,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 6,
+            'ing_id' => 16,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 6,
+            'ing_id' => 5,
+            'created_at' => now(),
+        ]);
+
+    //Hot-Dog
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 7,
+            'ing_id' => 1,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 7,
+            'ing_id' => 17,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 7,
+            'ing_id' => 18,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 7,
+            'ing_id' => 19,
+            'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 7,
+            'ing_id' => 5,
+            'created_at' => now(),
         ]);
     }
 }
