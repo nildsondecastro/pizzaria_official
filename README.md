@@ -103,6 +103,7 @@ O arquivo .env deve ser configurado nesse momento para que o comando migrate fun
 - `docker-compose run --rm npm install` (Instala as dependencias do frontEnd)
 - `docker-compose run --rm npm run dev` (Compilacao das libs do frontEnd)
 
+Tem que criar a base agora
 - `docker-compose run --rm artisan migrate --seed` (Cria as tabelas do banco de dados)
 
 
@@ -117,13 +118,13 @@ O arquivo .env deve ser configurado nesse momento para que o comando migrate fun
 - `docker-compose run --rm app chmod -R 775 bootstrap storage` (Mudo a permisao)
 - `docker-compose run --rm app chown -R www-data.www-data bootstrap storage` (Coloco o nginx para se dono da pasta)
 
-- `docker-compose run --rm artisan adminlte:install --only=main_views` (para trazer as views pro resource)
+- `docker-compose run --rm artisan adminlte:install --only=main_views` (para trazer as views pro resource)//
 
 ## Instalar plugin
 
-- `php artisan adminlte:plugins install --plugin=jqvmap`
+- `php artisan adminlte:plugins install --plugin=chartJs`
 
-- `docker-compose run --rm artisan adminlte:plugins install --plugin=jqvmap`
+- `docker-compose run --rm artisan adminlte:plugins install --plugin=chartJs`
 
 ## PWA
 

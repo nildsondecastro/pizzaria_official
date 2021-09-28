@@ -16,4 +16,7 @@ RUN docker-php-ext-install pgsql pdo pdo_pgsql
 
 ADD . /var/www
 
-RUN chown -R www-data:www-data /var/www #esse comando demora muito, verificar depois
+#esse comando demora muito, verificar depois
+RUN chown -R www-data:www-data /var/www 
+
+#RUN find /var/www -type d -exec chmod 0775 '{}' \;

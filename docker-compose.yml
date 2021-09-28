@@ -22,7 +22,7 @@ services:
 
   #Nginx Service
   webserver:
-    image: nginx:alpine
+    image: nginx:stable-alpine
     container_name: PB-v1_webserver
     tty: true
     ports:
