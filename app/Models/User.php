@@ -48,4 +48,13 @@ class User extends Authenticatable
         return $this->hasOne(Permission::class, 'usr_id', 'id');
     }
 
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class, 'usr_id', 'id');
+    }
+
+    public function carrinho()
+    {
+        return $this->hasOne(Carrinho::class, 'usr_id', 'id');
+    }
 }

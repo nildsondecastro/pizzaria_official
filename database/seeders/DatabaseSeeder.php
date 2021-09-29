@@ -7,6 +7,8 @@ use App\Models\Permission;
 use App\Models\User;
 use App\Models\Ingrediente;
 use App\Models\Produto;
+use App\Models\Pedido;
+use App\Models\Itemdopedido;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Homepage;
 use Illuminate\Support\Facades\DB;
@@ -108,10 +110,6 @@ class DatabaseSeeder extends Seeder
 
     //Ingredientes
         Ingrediente::create([
-            'ing_id' => 1,
-            'ing_nome' => 'mussarela',
-        ]);
-        Ingrediente::create([
             'ing_id' => 2,
             'ing_nome' => 'calabresa',
         ]);
@@ -122,10 +120,6 @@ class DatabaseSeeder extends Seeder
         Ingrediente::create([
             'ing_id' => 4,
             'ing_nome' => 'azeitona',
-        ]);
-        Ingrediente::create([
-            'ing_id' => 5,
-            'ing_nome' => 'orégano',
         ]);
 
         Ingrediente::create([
@@ -237,11 +231,6 @@ class DatabaseSeeder extends Seeder
     //pizza calabresa
         DB::table('produtos_ingredientes')->insert([
             'pro_id' => 1,
-            'ing_id' => 1,
-            'created_at' => now(),
-        ]);
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 1,
             'ing_id' => 2,
             'created_at' => now(),
         ]);
@@ -255,18 +244,8 @@ class DatabaseSeeder extends Seeder
             'ing_id' => 4,
             'created_at' => now(),
         ]);
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 1,
-            'ing_id' => 5,
-            'created_at' => now(),
-        ]);
 
     //pizza frango c catupiry
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 2,
-            'ing_id' => 1,
-            'created_at' => now(),
-        ]);
         DB::table('produtos_ingredientes')->insert([
             'pro_id' => 2,
             'ing_id' => 6,
@@ -277,17 +256,7 @@ class DatabaseSeeder extends Seeder
             'ing_id' => 7,
             'created_at' => now(),
         ]);
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 2,
-            'ing_id' => 5,
-            'created_at' => now(),
-        ]);
     //portuguesa
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 3,
-            'ing_id' => 1,
-            'created_at' => now(),
-        ]);
         DB::table('produtos_ingredientes')->insert([
             'pro_id' => 3,
             'ing_id' => 8,
@@ -308,17 +277,7 @@ class DatabaseSeeder extends Seeder
             'ing_id' => 4,
             'created_at' => now(),
         ]);
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 3,
-            'ing_id' => 5,
-            'created_at' => now(),
-        ]);
     //Napolitana
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 4,
-            'ing_id' => 1,
-            'created_at' => now(),
-        ]);
         DB::table('produtos_ingredientes')->insert([
             'pro_id' => 4,
             'ing_id' => 8,
@@ -334,17 +293,7 @@ class DatabaseSeeder extends Seeder
             'ing_id' => 4,
             'created_at' => now(),
         ]);
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 4,
-            'ing_id' => 5,
-            'created_at' => now(),
-        ]);
     //Bacon
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 5,
-            'ing_id' => 1,
-            'created_at' => now(),
-        ]);
         DB::table('produtos_ingredientes')->insert([
             'pro_id' => 5,
             'ing_id' => 12,
@@ -360,63 +309,74 @@ class DatabaseSeeder extends Seeder
             'ing_id' => 4,
             'created_at' => now(),
         ]);
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 5,
-            'ing_id' => 5,
-            'created_at' => now(),
-        ]);
-    //4 Queijos
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 6,
-            'ing_id' => 1,
-            'created_at' => now(),
-        ]);
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 6,
-            'ing_id' => 14,
-            'created_at' => now(),
-        ]);
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 6,
-            'ing_id' => 15,
-            'created_at' => now(),
-        ]);
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 6,
-            'ing_id' => 16,
-            'created_at' => now(),
-        ]);
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 6,
-            'ing_id' => 5,
-            'created_at' => now(),
-        ]);
 
     //Hot-Dog
         DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 7,
-            'ing_id' => 1,
-            'created_at' => now(),
-        ]);
-        DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 7,
+            'pro_id' => 6,
             'ing_id' => 17,
             'created_at' => now(),
         ]);
         DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 7,
+            'pro_id' => 6,
             'ing_id' => 18,
             'created_at' => now(),
         ]);
         DB::table('produtos_ingredientes')->insert([
-            'pro_id' => 7,
+            'pro_id' => 6,
             'ing_id' => 19,
+            'created_at' => now(),
+        ]);
+
+    //4 Queijos
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 7,
+            'ing_id' => 14,
             'created_at' => now(),
         ]);
         DB::table('produtos_ingredientes')->insert([
             'pro_id' => 7,
-            'ing_id' => 5,
+            'ing_id' => 15,
             'created_at' => now(),
+        ]);
+        DB::table('produtos_ingredientes')->insert([
+            'pro_id' => 7,
+            'ing_id' => 16,
+            'created_at' => now(),
+        ]);
+
+    //Pedido
+        Pedido::create([
+            'ped_taxa' => 7,    
+            'ped_valor' => 25,       
+            'ped_total' => 32,  
+            'ped_endereco' => 'teste',       
+            'ped_telefone' => 'teste',      
+            'ped_status' => 'realizado', 
+            'usr_id' => 1,
+        ]);
+        Pedido::create([
+            'ped_taxa' => 7,    
+            'ped_valor' => 22,       
+            'ped_total' => 29,  
+            'ped_endereco' => 'teste',       
+            'ped_telefone' => 'teste',      
+            'ped_status' => 'realizado', 
+            'usr_id' => 1,
+        ]);
+        Itemdopedido::create([
+            'itp_nome' => 'pizza 1 teste',
+            'itp_valor' => 22,
+            'ped_id' => 1,
+        ]);
+        Itemdopedido::create([
+            'itp_nome' => 'pizza 2 teste',
+            'itp_valor' => 22,
+            'ped_id' => 1,
+        ]);
+        Itemdopedido::create([
+            'itp_nome' => 'pizza 3 teste',
+            'itp_valor' => 22,
+            'ped_id' => 1,
         ]);
     }
 }

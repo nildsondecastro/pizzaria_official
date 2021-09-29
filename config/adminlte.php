@@ -243,6 +243,15 @@ return [
         //    'type'         => 'fullscreen-widget',
         //    'topnav_right' => true,
         //],
+        //[
+        //    'text'         => '',
+        //    'url'          => '#',
+        //    'icon'         => 'fas fa-shopping-cart',
+        //    'label'        => '{{Auth::user()->id}}',
+        //    'label_color'  => 'success',
+        //    'topnav_right' => true,
+        //    'can'          => 'login',
+        //],
 
         // Sidebar items:
         //[

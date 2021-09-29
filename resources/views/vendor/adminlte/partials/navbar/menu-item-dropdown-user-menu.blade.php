@@ -14,6 +14,14 @@
 @endif
 
 <li class="nav-item dropdown user-menu">
+    <a href="{{route('carrinho')}}" class="nav-link dropdown-toggle">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="badge badge-success right">
+             {{ count(Auth::user()->carrinho->itens) }}
+        </span>
+    </a>
+</li>
+<li class="nav-item dropdown user-menu">
 
     {{-- User menu toggler --}}
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">

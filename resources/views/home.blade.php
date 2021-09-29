@@ -44,7 +44,7 @@
 
           <div class="description-block">
             @if (isset($homepage->hom_aberto))
-              <a class="btn btn-info btn-sm" href="#">
+              <a class="btn btn-info btn-sm" href="{{route('cardapio')}}">
                 <h5 class="description-header">Faça seu Pedido</h5>
                 <span class="description-text">
                   <i class="icon fas fa-chart-pie"></i>

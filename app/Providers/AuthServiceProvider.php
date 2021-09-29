@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-use App\Models\Permission;
+use App\Models\Carrinho;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -30,6 +30,12 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('login', function () {
             if(isset(Auth::user()->id)){
+                $cart = Carrinho::where('usr_id', Auth::user()->id)->first();
+                if(!$cart){
+                    $cart = Carrinho::create([
+                        'usr_id' => Auth::user()->id,
+                    ]);
+                }
                 return true;
             }else{
                 return false;

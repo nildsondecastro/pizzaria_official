@@ -30,6 +30,13 @@ Route::get('/teste', [App\Http\Controllers\HomeController::class, 'teste'])->nam
 
 Route::middleware(['auth'])->group(function () {
 
+    //pedido e carrinho
+    Route::get('/carrinho', [App\Http\Controllers\PedidoController::class, 'getCarrinho'])->name('carrinho');
+    Route::post('/carrinho/add2sabores', [App\Http\Controllers\PedidoController::class, 'postAdd2Sabores'])->name('carrinho.add2sabores');
+    Route::post('/carrinho/add', [App\Http\Controllers\PedidoController::class, 'postAddItem'])->name('carrinho.add');
+    
+
+    //admin
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
 
 
