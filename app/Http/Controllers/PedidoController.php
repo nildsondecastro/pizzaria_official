@@ -75,7 +75,7 @@ class PedidoController extends Controller
             $sem2 = " completa.";
         }
 
-        $nome = "Metade ".$sabor1->pro_nome." ".$sem1." Metade ".$sabor2->pro_nome." ".$sem2;
+        $nome = "Metade ".$sabor1->pro_nome." ".$sem1." e Metade ".$sabor2->pro_nome." ".$sem2;
 
         $cart = Carrinho::where('usr_id', Auth::user()->id)->first();
         if(!$cart){
