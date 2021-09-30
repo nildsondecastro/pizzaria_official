@@ -40,7 +40,7 @@
           <div class="row">
             <p class="col-10">
               <small>
-                <i class="icon fas fa-pizza-slice"></i> {{$item->itp_nome}}
+                <i class="icon fas fa-pizza-slice"></i> Pizza {{$item->itp_nome}}
               </small>
             </p>
             <div class="offset-1 col-1">
