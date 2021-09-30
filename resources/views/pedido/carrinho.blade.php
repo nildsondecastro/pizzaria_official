@@ -60,14 +60,14 @@
       <div class="col-md-3 col-11 callout callout-info">
         <small>
           <div class="row justify-content-between">
-            Sub-total: <strong class="col-4">R$ {{Auth::user()->carrinho->car_valor}}</strong>
+            <span class="col-8">Sub-total:</span> <strong class="col-4">R$ {{Auth::user()->carrinho->car_valor}}</strong>
           </div>
           <div class="row justify-content-between">
-            Taxa de entrega: <span class="offset-5 col-1">+</span><strong class="col-4">R$ {{Auth::user()->carrinho->car_taxa}}</strong>
+            <span class="col-4">Taxa de entrega:</span> <span class="offset-3 col-1">+</span><strong class="col-4">R$ {{Auth::user()->carrinho->car_taxa}}</strong>
           </div>
           <hr>
           <div class="row justify-content-between">
-            Total: <strong class="col-4">R$ {{Auth::user()->carrinho->car_total}}</strong>
+            <span class="col-8">Total:</span> <strong class="col-4">R$ {{Auth::user()->carrinho->car_total}}</strong>
           </div>
         </small>
       </div>
