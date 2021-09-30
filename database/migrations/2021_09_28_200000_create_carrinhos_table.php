@@ -17,7 +17,7 @@ class CreateCarrinhosTable extends Migration
             $table->bigIncrements('car_id');
 
             $table->double('car_taxa', 12, 2)->default(0);
-            $table->double('car_valor', 12, 2)->default(0);
+            $table->double('car_valor', 12, 2)->default(0);//subtotal
             $table->double('car_total', 12, 2)->default(0);
 
             $table->unsignedBigInteger('usr_id');

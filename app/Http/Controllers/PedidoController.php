@@ -55,8 +55,6 @@ class PedidoController extends Controller
             $preco = $sabor2->pro_valor;
         }
 
-        $nome_item = "Metade ".$sabor1->pro_nome." metade ".$sabor2->pro_nome;
-
         foreach ($sabor1->ingredientes as $i) {
             $chave = substr($aux['selectSabor1'], 0, 8)."_".$i->ing_id;
             if (!array_key_exists($chave, $aux)) {
@@ -71,13 +69,13 @@ class PedidoController extends Controller
             }
         }
         if(!$sem1){
-            $sem1 = " com todos os ingredientes.";
+            $sem1 = " completa.";
         }
         if(!$sem2){
-            $sem2 = " com todos os ingredientes.";
+            $sem2 = " completa.";
         }
 
-        $nome = "Metade ".$sabor1->pro_nome.$sem1." Metade ".$sabor2->pro_nome.$sem2;
+        $nome = "Metade ".$sabor1->pro_nome." ".$sem1." Metade ".$sabor2->pro_nome." ".$sem2;
 
         $cart = Carrinho::where('usr_id', Auth::user()->id)->first();
         if(!$cart){
@@ -87,9 +85,9 @@ class PedidoController extends Controller
         }
 
         Itemdopedido::create([
-            'itp_nome' => $nome,     
+            'itp_nome'  => $nome,     
             'itp_valor' => $preco,    
-            'car_id' => $cart->car_id,
+            'car_id'    => $cart->car_id,
         ]);
         $cart->car_valor += $preco;
         $cart->save();
@@ -115,9 +113,8 @@ class PedidoController extends Controller
                 $sem = $sem."sem ".$i->ing_nome.", ";
             }
         }
-
         if(!$sem){
-            $sem = "com todos os ingredientes.";
+            $sem = "completa.";
         }
         
         $nome = $produto->pro_nome." ".$sem;
@@ -130,9 +127,9 @@ class PedidoController extends Controller
         }
 
         Itemdopedido::create([
-            'itp_nome' => $nome,     
+            'itp_nome'  => $nome,     
             'itp_valor' => $produto->pro_valor,    
-            'car_id' => $cart->car_id,
+            'car_id'    => $cart->car_id,
         ]);
         $cart->car_valor += $produto->pro_valor;
         $cart->save();

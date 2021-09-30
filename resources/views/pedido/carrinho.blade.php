@@ -34,8 +34,43 @@
     </div>
   </div>
   <section class="content" >
-    <div class="row">
-      
+    <div class="row justify-content-center">
+      @foreach (Auth::user()->carrinho->itens as $item)
+        <div class="col-md-3 col-11 callout callout-info">
+          <div class="row">
+            <p class="col-10">
+              <small>
+                <i class="icon fas fa-pizza-slice"></i> {{$item->itp_nome}}
+              </small>
+            </p>
+            <div class="offset-1 col-1">
+              <a href="#" ><i class="icon fa fa-trash-alt" style="color: red"></i></a>
+            </div>
+          </div>
+            <small>
+              <strong>R$ {{$item->itp_valor}}</strong>
+            </small>
+        </div>
+      @endforeach
+      <div class="col-md-3 col-11 callout callout-info">
+        <small>
+          Endereço
+        </small>
+      </div>
+      <div class="col-md-3 col-11 callout callout-info">
+        <small>
+          <div class="row justify-content-between">
+            Sub-total: <strong class="col-4">R$ {{Auth::user()->carrinho->car_valor}}</strong>
+          </div>
+          <div class="row justify-content-between">
+            Taxa de entrega: +<strong class="col-4">R$ {{Auth::user()->carrinho->car_taxa}}</strong>
+          </div>
+          <hr>
+          <div class="row justify-content-between">
+            Total: <strong class="col-4">R$ {{Auth::user()->carrinho->car_total}}</strong>
+          </div>
+        </small>
+      </div>
     </div>
   </section>
 
