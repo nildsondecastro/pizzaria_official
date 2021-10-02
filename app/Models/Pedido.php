@@ -25,4 +25,9 @@ class Pedido extends Model
     {
         return $this->hasMany(Itemdopedido::class, 'ped_id', 'ped_id');
     }
+
+    public function bairro()
+    {
+        return $this->hasOne(Bairro::class, 'bai_id', 'bai_id');
+    }
 }

@@ -379,7 +379,7 @@ return [
         ],
         [
             'text' => 'Configurações',
-            'url'  => '#',
+            'url'  => 'config',
             'icon' => 'fas fa-fw fa-cogs',
             'can'  => 'administrador',
         ],

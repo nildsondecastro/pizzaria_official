@@ -222,6 +222,7 @@
 @stop
 
 @section('css')
+{{-- 
   <style>
     .content-wrapper {
       background-image: url('dist/img/background1.jpg');
@@ -229,9 +230,12 @@
       background-size: cover;
     }
   </style>
+  --}}
+  
 @stop
 
 @section('js')
+  {{ Log::info("Cardápio Acessado"); }}
   <script>
 
     $(document).ready(function(){

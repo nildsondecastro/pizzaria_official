@@ -33,7 +33,10 @@
         @endif
 
         {{-- Content Wrapper --}}
-        <div class="content-wrapper {{ config('adminlte.classes_content_wrapper') ?? '' }}">
+        <div class="content-wrapper {{ config('adminlte.classes_content_wrapper') ?? '' }}" 
+            style="background-image: url('dist/img/background1.jpg');
+            background-position: center;
+            background-size: cover;">
 
             {{-- Content Header --}}
             @hasSection('content_header')

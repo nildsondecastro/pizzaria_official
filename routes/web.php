@@ -34,10 +34,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/carrinho', [App\Http\Controllers\PedidoController::class, 'getCarrinho'])->name('carrinho');
     Route::post('/carrinho/add2sabores', [App\Http\Controllers\PedidoController::class, 'postAdd2Sabores'])->name('carrinho.add2sabores');
     Route::post('/carrinho/add', [App\Http\Controllers\PedidoController::class, 'postAddItem'])->name('carrinho.add');
+    Route::delete('/carrinho/delete', [App\Http\Controllers\PedidoController::class, 'deleteItem'])->name('carrinho.delete');
     
 
     //admin
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/config', [App\Http\Controllers\AdminController::class, 'config'])->name('config');
+    Route::post('/config/homepage', [App\Http\Controllers\AdminController::class, 'postHomepage'])->name('config.homepage');
 
 
     //rotas de perfil e usuários

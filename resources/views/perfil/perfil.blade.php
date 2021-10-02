@@ -178,9 +178,6 @@
         </div>
     </section>
 
-
-
-
 @stop
 
 @section('css')

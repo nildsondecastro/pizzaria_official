@@ -102,7 +102,7 @@
 
     <script src="vendor/chart.js/Chart.js"></script>
     <script src="vendor/chart.js/Chart.bundle.js"></script>
-    {{ Log::info("Dashboard Acessado"); }}
+    {{ Log::info("Dashboard Acessado. ".Auth::user()); }}
     <script>
       
       new Chart(document.getElementById("line-chart"), {

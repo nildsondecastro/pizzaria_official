@@ -38,13 +38,19 @@
       @foreach (Auth::user()->carrinho->itens as $item)
         <div class="col-md-3 col-11 callout callout-info">
           <div class="row">
-            <p class="col-10">
+            <p class="col-9">
               <small>
                 <i class="icon fas fa-pizza-slice"></i> Pizza {{$item->itp_nome}}
               </small>
             </p>
             <div class="offset-1 col-1">
-              <a href="#" ><i class="icon fa fa-trash-alt" style="color: red"></i></a>
+              <form action="{{route('carrinho.delete')}}" method="POST">
+                @csrf
+                @method('delete')
+                <input type="hidden" name="itp_id" value="{{$item->itp_id}}">
+                <input type="hidden" name="car_id" value="{{Auth::user()->carrinho->car_id}}">
+                <button type="submit" class="btn" style="background-color:transparent"><i class="icon fa fa-trash-alt" style="color: red"></i></button>
+              </form>
             </div>
           </div>
             <small>
@@ -78,6 +84,7 @@
 @stop
 
 @section('css')
+{{-- 
   <style>
     .content-wrapper {
       background-image: url('dist/img/background1.jpg');
@@ -85,7 +92,10 @@
       background-size: cover;
     }
   </style>
+  --}}
+  
 @stop
 
 @section('js')
+  {{ Log::info("Tela do Carrinho acessada. ".Auth::user()); }}
 @stop

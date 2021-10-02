@@ -138,4 +138,20 @@ class PedidoController extends Controller
         
     }
 
+    public function deleteItem(Request $request)
+    {
+        if(!Auth::user()->permission->cliente){
+            return redirect()->back()->with('mensagem_erro', 'Seu usuário não tem permissão para está requisição.');
+        }
+        if(Auth::user()->carrinho->car_id != $request->car_id){
+            return redirect()->back()->with('mensagem_erro', 'Algum erro ocorreu.');
+        }
+
+        $item = Itemdopedido::find($request->itp_id);
+        $item->delete();
+
+        return redirect()->route('carrinho')->with('mensagem', 'Item removido do carrinho');
+        
+    }
+
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use App\Models\User;
+use App\Models\Homepage;
 
 class AdminController extends Controller
 {
@@ -25,6 +26,36 @@ class AdminController extends Controller
         $clientes = $this->array_clientes();
         
         return view("admin.dashboard", compact('users', 'clientes'));
+    }
+
+    public function config()
+    {
+        if(!Auth::user()->permission->administrador){
+            return redirect()->back()->with('mensagem_erro', 'Seu usuário não tem permissão para está requisição');
+        }
+        $homepage = Homepage::first();
+        
+        return view("admin.config", compact('homepage'));
+    }
+
+    public function postHomepage(Request $request)
+    {
+        if(!Auth::user()->permission->administrador){
+            return redirect()->back()->with('mensagem_erro', 'Seu usuário não tem permissão para está requisição');
+        }
+        $homepage = Homepage::first();
+        $homepage->hom_aberto = $request->hom_aberto;
+        $homepage->hom_faixa_decorativa = $request->hom_faixa_decorativa;
+        $homepage->hom_nome = $request->hom_nome;
+        $homepage->hom_telefone = $request->hom_telefone;
+        $homepage->hom_local = $request->hom_local;
+        $homepage->hom_minimo = $request->hom_minimo;
+        $homepage->hom_info1 = $request->hom_info1;
+        $homepage->hom_info2 = $request->hom_info2;
+        $homepage->hom_tempo_atendimento = $request->hom_tempo_atendimento;
+        $homepage->save();
+        
+        return redirect()->route('home')->with('mensagem', 'Alteração Realizada. Verifique se a tela inicial está em conformidade.');
     }
 
     private function array_clientes()

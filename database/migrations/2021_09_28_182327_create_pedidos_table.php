@@ -23,6 +23,9 @@ class CreatePedidosTable extends Migration
             $table->unsignedBigInteger('usr_id');
             $table->foreign('usr_id')->references('id')->on('users');
 
+            $table->unsignedBigInteger('bai_id');
+            $table->foreign('bai_id')->references('bai_id')->on('bairros');
+
             $table->longText('ped_endereco');
             $table->string('ped_telefone');
 
