@@ -18,17 +18,16 @@
 @stop
 
 @section('content')
-  
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Painel de Controle</h1>
-            <small>Esta tela é melhor visualizada no computador</small>
-          </div>
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 borda-texto" style="color: white; text-shadow: 2px 2px black;">Painel de Controle</h1>
+          <small style="color: white; text-shadow: 2px 2px black;">Esta tela é melhor visualizada no computador</small>
         </div>
       </div>
     </div>
+  </div>
 
     <section class="content">
       <div class="container-fluid">
